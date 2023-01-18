@@ -1,0 +1,14 @@
+.active{
+    background-color: purple !important;
+    color: white !important;
+}
+
+
+
+.exchangesNotFound{
+    
+    font-size: larger;
+    font-weight: bold;
+    color: purple;
+
+}
