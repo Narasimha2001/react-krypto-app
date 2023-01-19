@@ -24,6 +24,8 @@ const Coins = () => {
   const [maxPageNumberLimit,setMaxPageNumberLimit] = useState(5);
   const [minPageNumberLimit,setMinPageNumberLimit] = useState(0);
 
+  const [sort,setSort] = useState("rank");
+
 
   const pages = [];
   for(let i=1;i<=50;i++){
@@ -90,6 +92,7 @@ const Coins = () => {
         const { data } = await axios.get(
           `${server}/coins/markets?vs_currency=${currency}&page=${currentPage}&per_page=${itemsPerPage}`
         );
+        console.log(data);
         setCoins(data);
         setLoading(false);
       } catch (error) {
@@ -103,6 +106,34 @@ const Coins = () => {
 
   if (error) return <ErrorComponent message={"Error While Fetching Coins"} />;
 
+  function handleSelectChange(event){
+    setSort(event.target.value);
+  }
+  if(sort==="ascPrice"){  
+    coins.sort(function(x, y){
+      return x.current_price-y.current_price;
+
+    });
+    
+  }else if(sort==="descPrice"){
+    coins.sort(function(x, y){
+      return y.current_price-x.current_price;
+
+    });
+  }
+  else if(sort==="name"){
+    coins.sort(function(x,y){
+      let t1 = x.name.toLowerCase()
+      let t2 = y.name.toLowerCase()
+      return t1<t2?-1:1;
+    })
+  }else{
+    coins.sort(function(x,y){
+      return x.market_cap_rank-y.market_cap_rank;
+    })
+  }
+
+
 
   return (
     <Container maxW={"container.xl"}>
@@ -111,6 +142,7 @@ const Coins = () => {
       ) : (
         <>
         
+          <div className="sortRadio" >
 
           <RadioGroup  value={currency} onChange={setCurrency} p={"8"}>
             <HStack  spacing={"4"}>
@@ -119,7 +151,15 @@ const Coins = () => {
               <Radio value={"eur"}>EUR</Radio>
             </HStack>
           </RadioGroup>
+          <span className="dummySpan" ></span>
+          <select onChange={handleSelectChange}  value = {sort} name="" id="select">
+         <option value="rank">Sort by Rank  </option>       
+        <option value="ascPrice">Sort by Price: low to high</option>
+        <option value="descPrice">Sort by Price: high to low</option>
+        <option value="name">Sort by name</option>
+        </select>
 
+          </div>
           <HStack wrap={"wrap"} justifyContent={"space-evenly"}>
             {coins.map((i) => (
               <CoinCard

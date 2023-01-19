@@ -14,6 +14,8 @@ const Exchanges = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [query,setQuery] = useState("");
+
+  
   
     useEffect(()=>{
 
@@ -50,6 +52,7 @@ const Exchanges = () => {
     //   return <ExchangesNotFound />
     // }
 
+  
     return (
     <Container maxW={"container.xl"}>
 

@@ -33,6 +33,8 @@ const CoinDetails = () => {
   const [days, setDays] = useState("24h");
   const [chartArray, setChartArray] = useState([]);
 
+  
+
   const currencySymbol =
     currency === "inr" ? "₹" : currency === "eur" ? "€" : "$";
 
@@ -120,6 +122,8 @@ const CoinDetails = () => {
   //console.log(ans);
   const ans =50
 
+  
+
   return (
     <Container maxW={"container.xl"}>
       {loading ? (
@@ -150,6 +154,8 @@ const CoinDetails = () => {
               <Radio value={"eur"}>EUR</Radio>
             </HStack>
           </RadioGroup>
+
+        
 
           <VStack spacing={"4"} p={[null,"8"]} alignItems={"flex-start"}>
             <Text fontSize={"small"} alignSelf="center" opacity={0.7}>

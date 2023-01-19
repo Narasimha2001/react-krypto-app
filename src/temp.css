@@ -12,3 +12,16 @@
     color: purple;
 
 }
+
+.sortRadio{
+    display: flex;
+    align-items: center;
+}
+#select{
+    
+    border-radius: 0.2rem;
+    max-height: 2rem;
+}
+.dummySpan{
+    flex-grow: 1;
+}
